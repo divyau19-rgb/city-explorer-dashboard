@@ -14,7 +14,8 @@
       "Bash(git commit -m 'feat: add SQLite database layer *)",
       "Bash(git commit -m 'feat: add weather, air-quality, and geocoding API routes *)",
       "Bash(git commit -m 'feat: add events and favorites API routes *)",
-      "Bash(git commit -m 'feat: add useAutoRefresh hook and base UI components *)"
+      "Bash(git commit -m 'feat: add useAutoRefresh hook and base UI components *)",
+      "Bash(git commit -m 'feat: add WeatherWidget and AirQualityWidget *)"
     ]
   }
 }
