@@ -16,7 +16,8 @@
       "Bash(git commit -m 'feat: add events and favorites API routes *)",
       "Bash(git commit -m 'feat: add useAutoRefresh hook and base UI components *)",
       "Bash(git commit -m 'feat: add WeatherWidget and AirQualityWidget *)",
-      "Bash(git commit -m 'feat: add EventsWidget and FavoritesManager *)"
+      "Bash(git commit -m 'feat: add EventsWidget and FavoritesManager *)",
+      "Bash(git commit -m 'feat: wire up Dashboard page with city state and dark mode *)"
     ]
   }
 }
