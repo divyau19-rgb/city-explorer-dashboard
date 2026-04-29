@@ -40,7 +40,12 @@
       "Bash(curl -s -X POST \"http://localhost:3000/api/favorites\" -H \"Content-Type: application/json\" -d '{\"name\":\"Central Park\",\"type\":\"Park\",\"notes\":\"Great for morning runs\",\"city\":\"New York\"}')",
       "Bash(curl -s \"http://localhost:3000/api/favorites\")",
       "Bash(curl -s -X DELETE \"http://localhost:3000/api/favorites/1\")",
-      "Bash(git commit -m 'fix: force IPv4 DNS resolution for external API calls *)"
+      "Bash(git commit -m 'fix: force IPv4 DNS resolution for external API calls *)",
+      "Bash(git rm *)",
+      "Bash(git commit *)",
+      "Bash(git mv *)",
+      "PowerShell(Get-Process *)",
+      "PowerShell(Move-Item *)"
     ]
   }
 }
