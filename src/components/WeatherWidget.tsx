@@ -92,7 +92,7 @@ export default function WeatherWidget({ lat, lon }: Props) {
                   />
                   <YAxis hide domain={['dataMin - 2', 'dataMax + 2']} />
                   <Tooltip
-                    formatter={(v: number) => [`${v}°`, 'Temp']}
+                    formatter={(v) => [`${v}°`, 'Temp']}
                     contentStyle={{ fontSize: 12, borderRadius: 8 }}
                   />
                   <Line

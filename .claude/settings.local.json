@@ -17,7 +17,10 @@
       "Bash(git commit -m 'feat: add useAutoRefresh hook and base UI components *)",
       "Bash(git commit -m 'feat: add WeatherWidget and AirQualityWidget *)",
       "Bash(git commit -m 'feat: add EventsWidget and FavoritesManager *)",
-      "Bash(git commit -m 'feat: wire up Dashboard page with city state and dark mode *)"
+      "Bash(git commit -m 'feat: wire up Dashboard page with city state and dark mode *)",
+      "Bash(npm run *)",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/tailwindcss/package.json'\\).version\\)\")",
+      "Bash(git commit -m 'fix: switch to Tailwind v4 PostCSS plugin and update CSS syntax *)"
     ]
   }
 }

@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# City Explorer Dashboard
 
-## Getting Started
+A full-stack dashboard showing live city information — weather, air quality, events, and a personal favourites manager — built with **Next.js 16**, **React 19**, **SQLite**, and free public APIs.
 
-First, run the development server:
+## Features
+
+| Widget | Data source | Refresh |
+|---|---|---|
+| 🌤️ Weather | Open-Meteo (free, no key) | Every 10 min |
+| 🌬️ Air Quality | Open-Meteo AQ (free, no key) | Every 15 min |
+| 🎭 City Events | Ticketmaster (optional key) or demo data | Every hour |
+| ⭐ Favourites | Local SQLite database | On interaction |
+| 🕐 Live Clock | Browser | Every second |
+
+**Bonus features:** city search, dark mode, hourly temperature chart.
+
+## Tech Stack
+
+- **Frontend:** Next.js 16 App Router + React 19 Server & Client Components
+- **Styling:** Tailwind CSS v4
+- **Backend:** Next.js Route Handlers (no separate server needed)
+- **Database:** SQLite via `better-sqlite3`
+- **Charts:** Recharts
+- **Icons:** Lucide React
+
+## Quick Start
+
+### Prerequisites
+- Node.js 18+
+
+### Install & run
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Optional: real city events
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.local.example` to `.env.local` and add a free Ticketmaster API key:
 
-## Learn More
+```bash
+cp .env.local.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+Get a free key at [developer.ticketmaster.com](https://developer.ticketmaster.com/) — no credit card required.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── page.tsx                  # Dashboard entry point
+│   ├── layout.tsx                # Root layout with metadata
+│   ├── globals.css               # Tailwind v4 + dark mode config
+│   └── api/
+│       ├── weather/route.ts      # GET /api/weather
+│       ├── air-quality/route.ts  # GET /api/air-quality
+│       ├── events/route.ts       # GET /api/events
+│       ├── geocoding/route.ts    # GET /api/geocoding
+│       └── favorites/
+│           ├── route.ts          # GET + POST /api/favorites
+│           └── [id]/route.ts     # DELETE /api/favorites/:id
+├── components/
+│   ├── Dashboard.tsx             # City state + layout shell
+│   ├── WeatherWidget.tsx
+│   ├── AirQualityWidget.tsx
+│   ├── EventsWidget.tsx
+│   ├── FavoritesManager.tsx
+│   ├── LiveClock.tsx
+│   ├── CitySearch.tsx
+│   └── WidgetCard.tsx
+├── hooks/
+│   └── useAutoRefresh.ts         # Generic polling hook
+└── lib/
+    └── db.ts                     # SQLite singleton
+data/                             # SQLite database (git-ignored)
+```
 
-## Deploy on Vercel
+## Database Schema
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sql
+CREATE TABLE favorites (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  name       TEXT    NOT NULL,
+  type       TEXT    NOT NULL,
+  notes      TEXT,
+  city       TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## API Routes
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/weather?lat=&lon=` | Current weather + 12h forecast |
+| GET | `/api/air-quality?lat=&lon=` | US AQI + pollutant breakdown |
+| GET | `/api/events?lat=&lon=` | Upcoming city events |
+| GET | `/api/geocoding?q=` | City search autocomplete |
+| GET | `/api/favorites` | List saved places |
+| POST | `/api/favorites` | Add a favourite place |
+| DELETE | `/api/favorites/:id` | Remove a favourite place |
