@@ -12,7 +12,8 @@
       "Bash(npm install *)",
       "Bash(git push *)",
       "Bash(git commit -m 'feat: add SQLite database layer *)",
-      "Bash(git commit -m 'feat: add weather, air-quality, and geocoding API routes *)"
+      "Bash(git commit -m 'feat: add weather, air-quality, and geocoding API routes *)",
+      "Bash(git commit -m 'feat: add events and favorites API routes *)"
     ]
   }
 }
